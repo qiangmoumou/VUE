@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <mycom4></mycom4>
+    </div>
+
+    <template id="tmpl">
+        <h1>这是全局组件 --- {{ msg }}</h1>
+    </template>
+    <script>
+        // 1. 组件可以有自己的 data 数据
+        // 2. 组件的 data 和 实例的 data 有点不一样，实例中的 data 可以为一个对象，但是 组件中的 data 必须是一个方法
+        // 3. 组件中的 data 除了必须为一个方法之外，这个方法内部，还必须返回一个对象
+        // 4. 组件中的 data 数据，使用方式，和实例中的 data 使用方式完全一样
+        Vue.component('mycom4', {
+            template: '#tmpl',
+            data: function () {
+                return {
+                    msg: '这是组件自己中 data 定义的数据'
+                }
+            }
+        })
+
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {}
+        });
+    </script>
+</body>
+
+</html>

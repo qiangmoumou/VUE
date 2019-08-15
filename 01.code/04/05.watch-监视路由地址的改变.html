@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <!-- 1.导入包 -->
+    <script src="../js/vue-router.js"></script>
+    <style>
+        .myactive{
+            color:red;
+            font-weight:bold;
+        }
+
+        /* 动画 */
+        .v-enter,
+        .v-leave-to{
+            opacity:0;
+            transform: translateX(140px);
+        }
+
+        .v-enter-active,
+        .v-leave-active{
+            transition:all 0.5s ease;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+        <router-link to="/login">登录</router-link>
+        <router-link to="/register">注册</router-link>
+        
+        <!-- 动画 -->
+        <transition mode="out-in">
+            <!-- 容器 -->
+            <router-view></router-view>
+        </transition>
+
+    </div>
+
+    <script>
+
+        // 2. 创建子组件
+        var login = {
+            template: '<h3>这是登录子组件，这个组件是 奔波霸 开发的</h3>'
+        }
+
+        var register = {
+            template: '<h3>这是注册子组件，这个组件是 霸波奔 开发的</h3>'
+        }
+
+        // 3. 创建一个路由对象
+        var router = new VueRouter({
+            routes: [   // 路由规则数组
+                { path: '/', component: login },    // 一进来的时候默认显示这个登录组件
+                { path: '/login', component: login },
+                { path: '/register', component: register }
+            ],
+            linkActiveClass: 'myactive'     // 激活相关的类
+        })
+
+
+
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            // router: router
+            router,
+            watch: {
+                // this.$route.path
+                '$route.path': function (newVal, oldVal) {
+                    // console.log(newVal + '---' + oldVal)
+                    if(newVal === '/login') {
+                        console.log('欢迎进入登录页面')
+                    } else if(newVal === '/register') {
+                        console.log('欢迎进入注册页面')
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

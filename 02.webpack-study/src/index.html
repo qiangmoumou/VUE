@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 注意：不推荐直接再这里引用任何包和任何css文件 -->
+
+    <!-- 因为 main 中的代码，涉及到了ES6的新语法，但是浏览器不识别 -->
+    <!-- <script src="./main.js"></script> -->
+    <!-- 通过 webpack 这么一个前端构建工具，把 main.js 做了一个处理，生成了一个 bundle.js 的文件 -->
+    <!-- <script src="../dist/bundle.js"></script>  一旦依赖项目配置了，就不能本地引用了，已经被webpack-dev-server 托管到内存中了 -->      
+    <!-- 编译的代码是发到根目录，在内存里，不再发到 dist里面了 -->
+    <!--<script src="/bundle.js"></script>-->      <!-- 如果用了 html-webpack-plugin 插件的话，我们不再需要手动处理 bundle.js 的引用路径了，这个script就可以注释掉了。因为这个插件已经帮我们自动 创建了一个 合适的 script 标签，并且，引用了 正确的路径 -->
+
+    <!-- css 会发起二次请求，不推荐这么搞 -->
+    <!-- <link rel="stylesheet" href="./css/index.css"> -->
+
+    <!-- 当然不会用这种方式的，还是要通过 入口js文件搞 -->
+    <!-- <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css"> -->
+</head>
+<body>
+    <ul>
+        <li>这是第1个li</li>
+        <li>这是第2个li</li>
+        <li>这是第3个li</li>
+        <li>这是第4个li</li>
+        <li>这是第5个li</li>
+        <li>这是第6个li</li>
+        <li>这是第7个li</li>
+        <li>这是第8个li</li>
+        <li>这是第9个li</li>
+        <li>这是第10个li</li>
+    </ul>
+    <div class="box"></div>
+    <div class="box2"></div>
+
+    <!-- bootstrap 里面的东西，要用它，所以就 直接安装(bootstrap@3的版本才有这个功能，现在都到4的版本了，不是这么个用法了，所以就安装了版本 3) cnpm i bootstrap@3 -S -->
+    <span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
+
+</body>
+</html>
