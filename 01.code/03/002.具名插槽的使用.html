@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		
+		<div id="app">
+			<cpn><span slot="left">我要替换左边的</span></cpn>
+			
+			<cpn><span slot="center">我要替换中间的</span></cpn>
+			
+			<cpn><span slot="right">我要替换右边的</span></cpn>
+			<hr />
+			<cpn><span slot="left">左</span><span slot="center">中</span><span slot="right">右</span></cpn>
+		</div>
+		
+		<template id="teml">
+			<div>
+				<slot name="left"><span>left</span></slot>
+				<slot name="center"><span>center</span></slot>
+				<slot name="right"><span>right</span></slot>
+			</div>
+		</template>
+		
+		<script>
+			
+			const vm = new Vue({
+				el: '#app',
+				data: {
+					
+				},
+				components: {
+					cpn: {
+						template: '#teml'
+					}
+				}
+				
+			})
+			
+		</script>
+		
+	</body>
+</html>

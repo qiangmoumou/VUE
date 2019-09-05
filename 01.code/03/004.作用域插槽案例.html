@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		
+		<!--父组件替换插槽的标签,但是内容由子组件来提供-->
+		
+		<div id="app">
+			<cpn></cpn>
+			<hr />
+			<cpn>
+				<!-- 目的是获取子组件中的 pLanguage -->
+				<!--vue2.5.x以下用template,以上用div也行-->
+				<template slot-scope="slot">
+					<span v-for="item in slot.abc">{{ item }}--</span>
+				</template>
+			</cpn>
+			
+		</div>
+		
+		<template id="teml">
+			<div>
+				<slot :abc="pLanguage">
+					<ul>
+						<li v-for="item in pLanguage">{{ item }}</li>
+					</ul>
+				</slot>
+			</div>
+		</template>
+		
+		<script>
+			
+			const vm = new Vue({
+				el: '#app',
+				data: {
+				},
+				methods: {},
+				components: {
+					cpn: {
+						template: '#teml',
+						data() {
+							return {
+								pLanguage: ['JavaScript', 'c++', 'Java', 'c#', 'Python', 'Go', 'Swift']
+							}
+						}
+					}
+				}
+			})
+			
+		</script>
+		
+	</body>
+</html>

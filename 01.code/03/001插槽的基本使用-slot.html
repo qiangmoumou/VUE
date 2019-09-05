@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		
+		<div id="app">
+			<!--组件中预留的插槽,在引入时候的标签里面输入 你想使用的内容适配插槽-->
+			<cpn><button>按钮</button></cpn>
+			<cpn><span>哈哈哈</span></cpn>
+			<cpn><i>牛逼</i></cpn>
+			<cpn><i>牛逼</i><p>可以写很多</p></cpn>
+			<cpn></cpn>
+			<cpn></cpn>
+		</div>
+		
+		<template id="teml">
+			<div>
+				<h2>我是组件</h2>
+				<p>我是组件,哈哈哈</p>
+				<!-- 调用多次,想每次显示的都不一样,怎么办,用插槽就可以了 -->
+				<!-- 也可以默认一个按钮的插槽,但是别人如果在引用的时候, 在标签里面输入内容就会把这个插槽给覆盖掉  -->
+				<slot><button>slot设置的默认插槽内容</button></slot>
+			</div>
+		</template>
+		
+		<script>
+			
+			const vm = new Vue({
+				el: '#app',
+				data: {
+					
+				},
+				components: {
+					cpn: {
+						template: '#teml'
+					}
+				}
+				
+			})
+			
+		</script>
+		
+		<!--
+			1. 插槽的基本使用 <slot></slot>
+			2. 插槽的默认值 <slot>button</slot>
+			3. 如果有多个值,同时放入到组件进行替换时,一起作为替换元素
+		-->
+		
+	</body>
+</html>

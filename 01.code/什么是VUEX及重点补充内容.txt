@@ -1,0 +1,73 @@
+概念:vuex 是 Vue 配套的 公共数据管理工具, 他可以把一些共享的数据, 保存到 vuex 中,方便整个程序中的任何组件直接获取或修改我们的公共数据
+
+Vuex 是 为了 保存 组件之间共享数据而诞生的,如果组件之间 有要共享的数据,可以直接挂载到 vuex 中, 而不必通过 父子组件之间传值了,如果 组件的数据不需要共享, 此时,这些不需要共享的私有数据, 没有必要放到 vuex 中;
+
+只有共享的数据,才有权利放到 vuex 中;
+组件内部私有的数据,只要放到 组件的 data 中即可;
+
+props 和 data vuex 的区别;
+
+Vuex 是一个全局的共享数据存储区域,就相当于是一个数据的仓库
+
+
+
+1. 数组中可以在DOM中响应式随改随变的方法
+    1) push()
+    2) pop()
+    3) shift()
+    4) unshift()
+    5) splice()
+    6) sort()
+    7) reverse()
+    8) set(要修改的对象, 索引值, 修改后的值)
+       Vue.set(this.shuzu, 0, 'vbbbbb')  
+
+
+2. 如果是通过索引是直接的修改 数组 就不是响应式的了
+    eg: this.shuzu[0] = 'sdf'
+    // 虽然数组里面的确是修改了,但是不是即时的响应到DOM中去    
+
+
+3. 高阶函数
+    1) filter() 的使用 
+        const nums = [10, 20, 40, 50, 654, 212]
+        let newNums = nums.filter(function (n) {    // filter中的回调函数有一个要求:必须返回一个 boolean值: 
+            //true:当返回 true 时,函数内部会自动将这次回调的 n 加入到新的数组中, // false: 当返回 false 时,函数内部会过滤掉这次的 n
+            return n < 100    // 会得到小于100的一个集合的一个新数组
+        })
+        console.log(newNums)
+
+    2) map()函数的使用
+        // 20 40 80 100
+        let new2Num = newNums.map(function (n) {    // 也是把数组中的值各个拿出来执行 1次 
+            return n * 2    // 最后得 没个 数字都乘以 2 , 返回一个新的数组
+        })
+        console.log(new2Num)
+
+    3) reduce 函数的使用: 作用,对数组中所有的内容进行汇总
+        // new2Num.reduce(preValue, n)
+        let total = new2Num.reduce(function (preValue, n) {
+            return preValue + n
+        }, 0)
+            // 第一次:preValue 0 n 20
+            // 第二次:preValue 20 n 40
+            // 第三次:preValue 60 n 80
+            // 第四次:preValue 140 n 100
+            // 240
+
+    let total = nums.filter(n => n < 100).map(n => n * 2).reduce((pre, n) => pre + n)
+    console.log(total)        
+
+
+4. 什么是数据双向绑定,它的实现原理
+    v-bind:value="message"     // 数据绑定到 DOM      :value="message"
+    v-on:input="value"  // 一个检测input输入的事件  把这个输入的值 赋值给 message       // @input="message = $event.target.value"
+        value(event) {
+            this.message = event.target.value    // 一旦浏览器见面上产生一个事件的话,浏览器会生成一个 event 对象, 这个 event 对象里面就有包含着我们想要的信息
+        }
+        // 这样就实现了 数据双向绑定
+
+    v-model 修饰符
+        1) v-model.lazy 相当于懒加载一样,不会时时变化,只有当敲下回车和 Input失去焦点的时候才会 更新数据   
+        2) v-model.number 自动将输入到 input 框里的内容转成数字类型
+        3) v-model.trim 过滤掉内容左右两边的空格
