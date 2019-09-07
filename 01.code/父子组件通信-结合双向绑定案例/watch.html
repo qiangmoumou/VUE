@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+        <cpn :number1="num1" :number2="num2" @num1change="num1change" @num2change="num2change"></cpn>
+    </div>
+
+    <template id="teml">
+        <div>
+             <h2>props:{{ number1 }}</h2>
+             <h2>data:{{ dnumber1 }}</h2>
+             <input type="text" v-model="dnumber1">
+             <hr>
+             <h2>props:{{ number2 }}</h2>
+             <h2>data:{{ dnumber2 }}</h2>
+             <input type="text" v-model="dnumber2">
+        </div>
+    </template>
+
+    <script>
+    
+        var cpn = {
+            template: '#teml',
+            props: [
+                'number1',
+                'number2'
+            ],
+            data() {
+                return {
+                    dnumber1: this.number1,
+                    dnumber2: this.number2
+                }
+            },
+            methods: {
+               
+            },
+            watch: {
+                dnumber1(newValue) {
+                    this.dnumber2 = newValue * 100
+                    this.$emit('num2change', newValue)
+                },
+                dnumber2(newValue) {
+                    this.dnumber1 = newValue / 100
+                    this.$emit('num1change', newValue)
+                }
+            }
+        }
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                num1: 1,
+                num2: 0
+            },
+            methods: {
+                num1change(value) {
+                    this.num1 = value
+                },
+                num2change(value) {
+                    this.num2 = value
+                }
+            },
+            components: {
+                cpn
+            }
+        })
+    
+    </script>
+
+</body>
+</html>
